@@ -24,12 +24,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker image
-        run: |
-          IMAGE_TAG=ghcr.io/${{ github.repository }}/blooo-ragflow:latest
-          docker build -t $IMAGE_TAG -f Dockerfile.slim
-
-      - name: Push Docker image
-        run: |
-          IMAGE_TAG=ghcr.io/${{ github.repository }}/blooo-ragflow:latest
-          docker push $IMAGE_TAG
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile.slim
+          push: true
+          tags: ghcr.io/${{ github.repository }}/blooo-ragflow:latest
