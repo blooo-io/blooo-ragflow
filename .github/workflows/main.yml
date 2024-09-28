@@ -27,7 +27,7 @@ jobs:
       - name: Build Docker image
         run: |
           IMAGE_TAG=ghcr.io/${{ github.repository }}/blooo-ragflow:latest
-          docker build -t $IMAGE_TAG .
+          docker build -t $IMAGE_TAG Dockerfile.slim
 
       - name: Push Docker image
         run: |
